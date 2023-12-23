@@ -23,11 +23,11 @@ public class Vacancy {
   private Integer id;
 
   @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-  @Column(name = "employer")
+  @JoinColumn(name = "employer")
   private Employer employer;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @Column(name="area")
+  @JoinColumn(name="area")
   private Area area;
 
   @Column(name = "title")
