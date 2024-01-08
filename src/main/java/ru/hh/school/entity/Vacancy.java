@@ -1,5 +1,6 @@
 package ru.hh.school.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,26 +14,40 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 //TODO: оформите entity
+@Entity
 public class Vacancy {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Integer id;
 
+  @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+  @JoinColumn(name = "employer")
   private Employer employer;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name="area")
   private Area area;
 
+  @Column(name = "title")
   private String title;
-
+  @Column(name = "description")
   private String description;
 
+  @Column(name = "compensationFrom")
   private Integer compensationFrom;
 
+  @Column(name = "compensationTo")
   private Integer  compensationTo;
 
+  @Column(name = "compensationGross")
   private Boolean compensationGross;
 
+  @Column(name = "creationTime")
   private LocalDateTime creationTime;
 
+  @Column(name = "archivingTime")
   private LocalDateTime archivingTime;
 
   public Vacancy() {
@@ -100,7 +115,7 @@ public class Vacancy {
 
   @Override
   public int hashCode() {
-    return 17;
+    return Objects.hash(id);
   }
 
 }
